@@ -8,6 +8,7 @@ import AddToBasketButton from "@/components/AddToBasketButton";
 import Image from "next/image";
 import { imageUrl } from "@/lib/imageUrl";
 import Loader from "@/components/Loader";
+import { createCheckoutSession, Metadata } from "@/actions/createCheckoutSession";
 
 function BasketPage() {
     const groupedItems = useBasketStore((state) => state.getGroupedItems());
@@ -36,7 +37,29 @@ function BasketPage() {
         )
     }
 
-    const handleCheckout = async () => {}
+    const handleCheckout = async () => {
+        if (!isSignedIn) return;
+        setIsLoading(true);
+
+        try {
+            const metadata: Metadata = {
+                orderNumber: crypto.randomUUID(),
+                customerName: user?.fullName ?? "Unknown",
+                customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+                clerkUserId: user!.id
+            }
+
+            const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+            if (checkoutUrl) {
+                window.location.href = checkoutUrl;
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <div className="container mx-auto p-4 max-w-6xl">
