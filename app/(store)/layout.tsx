@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Header from "@/components/Header";
 import { SanityLive } from "@/sanity/lib/live";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Create Next App main",
