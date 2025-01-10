@@ -6,7 +6,7 @@ import { PackageIcon, TrolleyIcon } from "@sanity/icons";
 import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import useBasketStore from "@/app/(store)/store";
 
-function header() {
+function Header() {
   const { user } = useUser();
   const itemCount = useBasketStore((state) =>
      state.items.reduce((total, item) => total + item.quantity, 0)
@@ -115,4 +115,4 @@ function header() {
   );
 }
 
-export default header
+export default Header
