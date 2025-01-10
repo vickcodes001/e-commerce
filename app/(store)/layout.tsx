@@ -6,7 +6,7 @@ import { SanityLive } from "@/sanity/lib/live";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App main",
